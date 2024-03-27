@@ -24,6 +24,7 @@ import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.service.ScoreService;
 import lombok.RequiredArgsConstructor;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.ARETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -110,5 +111,31 @@ public class ScoreController {
         return "chap04/score-detail";
     }
 
+    // 수정 페이지로 이동 요청
+    @GetMapping("/modify")
+    public String modify(int stuNum, Model model) {
+        System.out.println("/score/modify: GET!!");
+        retrieve(stuNum, model);
+
+        return "chap04/score-modify";
+    }
+
+    // 수정 처리 요청
+    @PostMapping("/modify")
+    public String modify(ScoreRequestDTO dto, int stuNum) {
+        // 서비스, 레파지토리 계층과 연계하여 update 처리를 진행해 주세요.
+        // 수정이 완료된 후 사용자에게 응답할 페이지는
+        // 최신 수정 내용이 반영된 detail 페이지 입니다. -> redirect
+        System.out.println("/score/modify: POST!!");
+        service.updateScore(stuNum, dto);
+
+        return "redirect:/score/detail?stuNum=" + stuNum;
+    }
+
+
+    private void retrieve(int stuNum, Model model) {
+        Score score = service.findOne(stuNum);
+        model.addAttribute("s", score);
+    }
 
 }
