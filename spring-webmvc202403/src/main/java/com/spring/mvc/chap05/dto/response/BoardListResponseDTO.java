@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Getter @ToString
 @EqualsAndHashCode
@@ -20,17 +19,16 @@ public class BoardListResponseDTO {
     private final int viewCount;
     private final String writer;
 
-
     public BoardListResponseDTO(Board board) {
         this.boardNo = board.getBoardNo();
         this.shortTitle = makeShortTitle(board.getTitle());
         this.shortContent = makeShortContent(board.getContent());
         this.regDate = makePrettierDateString(board.getRegDate());
         this.viewCount = board.getViewCount();
-        this.writer =board.getWriter();
+        this.writer = board.getWriter();
     }
 
-    private String makePrettierDateString(LocalDateTime regDate) {
+    public static String makePrettierDateString(LocalDateTime regDate) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return dtf.format(regDate);
     }
@@ -38,8 +36,9 @@ public class BoardListResponseDTO {
     private String makeShortContent(String content) {
         return sliceString(content, 30);
     }
+
     private String makeShortTitle(String title) {
-        return null;
+        return sliceString(title, 5);
     }
 
     /**
@@ -55,7 +54,6 @@ public class BoardListResponseDTO {
                 : targetString
                 ;
     }
-
 
 
 }
