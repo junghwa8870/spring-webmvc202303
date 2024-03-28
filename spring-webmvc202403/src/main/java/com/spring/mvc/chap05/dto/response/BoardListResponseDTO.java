@@ -29,6 +29,10 @@ public class BoardListResponseDTO {
     }
 
     public static String makePrettierDateString(LocalDateTime regDate) {
+        if (regDate == null) {
+            return "N/A"; // or handle the null case appropriately
+        }
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return dtf.format(regDate);
     }
