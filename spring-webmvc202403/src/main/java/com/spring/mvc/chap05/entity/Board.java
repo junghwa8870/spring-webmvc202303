@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 @ToString @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Board {
 
     private int boardNo; // 게시글 번호
@@ -29,11 +30,14 @@ public class Board {
     private LocalDateTime regDate; // 작성일자시간
     private String writer; // 작성자
 
-
     public Board(BoardWriteRequestDTO dto) {
         this.writer = dto.getWriter();
         this.title = dto.getTitle();
         this.content = dto.getContent();
 //        this.regDate = LocalDateTime.now();
     }
+
+
+
+
 }
