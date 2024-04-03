@@ -5,7 +5,6 @@ import com.spring.mvc.chap05.dto.request.ReplyModifyRequestDTO;
 import com.spring.mvc.chap05.dto.request.ReplyPostRequestDTO;
 import com.spring.mvc.chap05.dto.response.ReplyDetailResponseDTO;
 import com.spring.mvc.chap05.dto.response.ReplyListResponseDTO;
-import com.spring.mvc.chap05.entity.Reply;
 import com.spring.mvc.chap05.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 /**
@@ -86,7 +84,8 @@ public class ReplyApiController {
     @PutMapping
     public ResponseEntity<?> update(@Validated @RequestBody ReplyModifyRequestDTO dto,
                                     BindingResult result) {
-        if (result.hasErrors()) {
+
+        if(result.hasErrors()) {
             return ResponseEntity
                     .badRequest()
                     .body(result.toString());
@@ -104,7 +103,7 @@ public class ReplyApiController {
         if (replyNo == null) {
             return ResponseEntity
                     .badRequest()
-                    .body("댓글 번호가 전달되지 않음");
+                    .body("댓글 번호가 전달되지 않음!");
         }
 
         System.out.println("/api/v1/replies/ " + replyNo + ": DELETE");
@@ -119,6 +118,10 @@ public class ReplyApiController {
                     .internalServerError()
                     .body(e.getMessage());
         }
+
+
     }
+
+
 
 }
