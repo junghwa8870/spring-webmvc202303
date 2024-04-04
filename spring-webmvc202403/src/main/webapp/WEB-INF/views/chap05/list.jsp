@@ -23,7 +23,7 @@
     <div class="main-title-wrapper">
         <h1 class="main-title">꾸러기 게시판</h1>
         <c:if test="${login != null}">
-        <button class="add-btn">새 글 쓰기</button>
+            <button class="add-btn">새 글 쓰기</button>
         </c:if>
     </div>
 
@@ -79,14 +79,14 @@
 
                     </div>
                 </section>
-                <c:if test="${login.quth == '관리자회원' || login.account == b.writer}">
-                <div class="card-btn-group">
-                    <button class="del-btn" data-href="/board/delete?bno=${b.boardNo}">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                </c:if>
 
+                <c:if test="${login.auth == '관리자회원' || login.account == b.writer}">
+                    <div class="card-btn-group">
+                        <button class="del-btn" data-href="/board/delete?bno=${b.boardNo}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </c:if>
 
             </div>
         </c:forEach>
