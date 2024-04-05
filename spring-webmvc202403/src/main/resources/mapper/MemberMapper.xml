@@ -6,9 +6,9 @@
 
     <insert id="save">
         INSERT INTO tbl_member
-        (account, password, name, email)
+        (account, password, name, email, profile_image)
         VALUES
-        (#{account}, #{password}, #{name}, #{email})
+        (#{account}, #{password}, #{name}, #{email}, #{profileImage})
     </insert>
 
     <select id="findMember" resultType="member">
@@ -32,5 +32,12 @@
         SET session_id = #{sessionId}, limit_time = #{limitTime}
         WHERE account = #{account}
     </update>
+
+    <select id="findMemberByCookie" resultType="member">
+        SELECT
+        account, name, email, auth, limit_time
+        FROM tbl_member
+        WHERE session_id = #{sessionId}
+    </select>
 
 </mapper>
